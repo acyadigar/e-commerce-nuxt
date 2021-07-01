@@ -1,0 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Walter+Turncoat&display=swap');
+nav a,
+nav a:hover,
+nav a:active {
+  text-decoration: none;
+  color: inherit;
+}
