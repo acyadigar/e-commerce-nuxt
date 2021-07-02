@@ -6,7 +6,7 @@ export default {
     ...mapActions('cart', ['setCart'])
   },
   mounted() {
-    this.setCart()
+    if(localStorage.getItem('cart')) return this.setCart()
   }
 }
 </script>
