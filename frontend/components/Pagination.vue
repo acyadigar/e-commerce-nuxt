@@ -1,3 +1,22 @@
+<script>
+export default {
+  props: ['total', 'currentPage'],
+  data() {
+    return {
+      perPage: 6
+    }
+  },
+  computed: {
+    pages() {
+      return [...Array(Math.ceil(this.total / this.perPage)).keys()].slice(1)
+    },
+    isCurrentPage() {
+      return (this.currentPage == (this.number + 1)) ? true : false
+    }
+  }
+}
+</script>
+
 <template>
   <div class="links float-right mt-4">
     <b-list-group horizontal>
@@ -17,25 +36,6 @@
     
   </div>
 </template>
-
-<script>
-export default {
-  props: ['total', 'currentPage'],
-  data() {
-    return {
-      perPage: 6
-    }
-  },
-  computed: {
-    pages() {
-      return [...Array(Math.ceil(this.total / this.perPage)).keys()].slice(1)
-    },
-    isCurrentPage() {
-      return (this.currentPage == (this.number + 1)) ? true : false
-    }
-  }
-}
-</script>
 
 <style scoped>
 a {

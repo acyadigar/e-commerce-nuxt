@@ -1,3 +1,9 @@
+<script>
+export default {
+  props: ['error']
+}
+</script>
+
 <template>
   <div class="error">
     <b-icon icon="exclamation-circle" style="width: 120px; height: 120px; color: crimson;"></b-icon>
@@ -6,12 +12,6 @@
     <nuxt-link to='/'>Go to safe zone!</nuxt-link>
   </div>
 </template>
-
-<script>
-export default {
-  props: ['error']
-}
-</script>
 
 <style scoped>
 .error {

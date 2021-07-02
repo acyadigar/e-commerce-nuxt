@@ -1,3 +1,19 @@
+<script>
+import { mapState, mapActions } from 'vuex'
+
+export default {
+  computed: {
+    ...mapState({
+      user: state => state.user,
+      cart: state => state.cart.cart
+    })
+  },
+  methods: {
+    ...mapActions(['logout'])
+  }
+}
+</script>
+
 <template>
 <b-navbar toggleable="lg" type="dark" variant="dark">
     <b-navbar-brand class="mr-5">Alper's Bazaar</b-navbar-brand>
@@ -57,19 +73,3 @@
     </b-collapse>
   </b-navbar>
 </template>
-
-<script>
-import { mapState, mapActions } from 'vuex'
-
-export default {
-  computed: {
-    ...mapState({
-      user: state => state.user,
-      cart: state => state.cart.cart
-    })
-  },
-  methods: {
-    ...mapActions(['logout'])
-  }
-}
-</script>
