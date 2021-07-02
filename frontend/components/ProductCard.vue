@@ -1,12 +1,21 @@
 <script>
+import { mapState } from 'vuex'
 import cartHandler from '@/mixins/cartHandler'
 
 export default {
   mixins: [cartHandler],
   props: ['product', 'isSmall'],
   computed: {
+    ...mapState({
+      user: state => state.user
+    }),
     isSmallCol() {
       return this.isSmall ? 6 : 4
+    }
+  },
+  methods: {
+    signIn() {
+      this.$bvModal.show('auth-modal-register')
     }
   }
 }
@@ -20,13 +29,21 @@ export default {
       <b-col cols='7' class="pl-4">
         <h1 class="card-title">{{product.title}}</h1>
         <p class="price text-info">{{product.price}}₺</p>
-        <div @click='add' class="add" v-if="!onCart">
-          <b-icon icon='cart-check'></b-icon>
-            Add to cart
+        <div class="cart-handlers" v-if="Object.keys(user).length">
+          <div @click='add' class="add" v-if="!onCart">
+            <b-icon icon='cart-check'></b-icon>
+              Add To Cart
+          </div>
+          <div @click='remove' class="remove" v-else>
+            <b-icon icon='cart'></b-icon>
+              Remove From Cart
+          </div>
         </div>
-        <div @click='remove' class="remove" v-else>
-          <b-icon icon='cart'></b-icon>
-            Remove From Cart
+        <div class="cart-handler-else" v-else>
+          <div @click='signIn' class="add">
+            <b-icon icon='cart-check'></b-icon>
+              Add To Cart
+          </div>
         </div>
         <nuxt-link :to='`/products/${product._id}`' class="go-detail">
           <b-icon icon='eye'></b-icon>
