@@ -9,7 +9,12 @@ router.get('/all', async (req, res) => {
 })
 
 router.get('/all/paginated', async (req, res) => {
-  let products = await ProductService.findAll()
+  let products;
+  if(req.query.search) {
+    products = await ProductService.findQuery(req.query.search)
+  } else {
+    products = await ProductService.findAll()
+  }
   products = products.reverse()
   const productsLength = products.length
 

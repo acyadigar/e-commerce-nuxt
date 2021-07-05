@@ -1,12 +1,33 @@
+<script>
+export default {
+  data() {
+    return {
+      search: '',
+    }
+  },
+  methods: {
+    submit(e) {
+      e.preventDefault()
+      if(!this.search) return
+      this.$nuxt.$router.push(`/products?search=${this.search}`)
+    }
+  }
+}
+</script>
+
 <template>
   <div class="main">
     <header>
       <h1>Alper's Bazaar</h1>
       <p>In order to find your most needed product;</p>
-      <div class="search-block">
-        <input type="text" placeholder="Search product or any brand" />
-        <b-icon class="search" icon="search"></b-icon>
-      </div>
+      <form @submit='submit' class="search-block">
+        <input
+          type="text"
+          placeholder="Search product or any brand"
+          v-model="search"
+        />
+        <b-icon @click='submit' class="search" icon="search"></b-icon>
+      </form>
     </header>
   </div>
 </template>
