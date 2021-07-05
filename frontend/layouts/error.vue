@@ -1,15 +1,18 @@
 <script>
 export default {
-  props: ['error']
+  props: ['error'],
 }
 </script>
 
 <template>
   <div class="error">
-    <b-icon icon="exclamation-circle" style="width: 120px; height: 120px; color: crimson;"></b-icon>
+    <b-icon
+      icon="exclamation-circle"
+      style="width: 120px; height: 120px; color: crimson"
+    ></b-icon>
     <h1>Hey, something went wrong!</h1>
-    <p v-if='error.message'>{{error.message}}</p>
-    <nuxt-link to='/'>Go to safe zone!</nuxt-link>
+    <p v-if="error.message">{{ error.message }}</p>
+    <nuxt-link to="/">Go to safe zone!</nuxt-link>
   </div>
 </template>
 

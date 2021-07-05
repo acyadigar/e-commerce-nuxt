@@ -4,8 +4,8 @@
       <h1>Alper's Bazaar</h1>
       <p>In order to find your most needed product;</p>
       <div class="search-block">
-        <input type="text" placeholder="Search product or any brand">
-        <b-icon class="search" icon='search'></b-icon>
+        <input type="text" placeholder="Search product or any brand" />
+        <b-icon class="search" icon="search"></b-icon>
       </div>
     </header>
   </div>
@@ -53,7 +53,7 @@ input {
   margin: auto;
   width: 100%;
   border-radius: 1rem 0 0 1rem;
-  padding: .5rem 1rem;
+  padding: 0.5rem 1rem;
   border: none;
 }
 input:focus {

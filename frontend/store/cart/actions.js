@@ -4,7 +4,7 @@ export default {
     commit('SET_CART', data)
   },
   addToCart({ commit }, data) {
-    if(!localStorage.getItem('cart')) {
+    if (!localStorage.getItem('cart')) {
       localStorage.setItem('cart', JSON.stringify([data]))
     } else {
       const cart = JSON.parse(localStorage.getItem('cart'))
@@ -15,9 +15,9 @@ export default {
   },
   removeFromCart({ commit }, data) {
     let cart = JSON.parse(localStorage.getItem('cart'))
-    cart = cart.filter(product => product._id != data._id)
+    cart = cart.filter((product) => product._id != data._id)
     localStorage.setItem('cart', JSON.stringify(cart))
-    
+
     commit('REMOVE_FROM_CART', data)
-  }
+  },
 }

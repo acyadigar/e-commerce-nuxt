@@ -3,11 +3,11 @@ import { mapActions } from 'vuex'
 export default {
   middleware: ['auth'],
   methods: {
-    ...mapActions('cart', ['setCart'])
+    ...mapActions('cart', ['setCart']),
   },
   mounted() {
-    if(localStorage.getItem('cart')) return this.setCart()
-  }
+    if (localStorage.getItem('cart')) return this.setCart()
+  },
 }
 </script>
 

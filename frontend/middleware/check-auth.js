@@ -1,3 +1,3 @@
-export default ({store, redirect}) => {
+export default ({ store, redirect }) => {
   if (!store.state.token) return redirect('/')
 }

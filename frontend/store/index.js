@@ -11,8 +11,8 @@ export const mutations = {
     state.token = data.token
   },
   LOGOUT(state) {
-    [state.user, state.token] = [{}, null]
-  }
+    ;[state.user, state.token] = [{}, null]
+  },
 }
 
 export const actions = {
@@ -20,28 +20,28 @@ export const actions = {
     const result = await this.$axios.post('/auth/verify', { token })
     const user = {
       ...result.data,
-      token
+      token,
     }
     commit('SET_USER', user)
   },
   async register({ commit }, data) {
     const result = await this.$axios.post('/auth/register', data)
-    Cookies.set('Token', result.data.token, {expires: 1})
+    Cookies.set('Token', result.data.token, { expires: 1 })
     commit('SET_USER', result.data)
   },
   async editUser({ commit }, data) {
     const result = await this.$axios.patch('/auth/edit', data)
-    Cookies.set('Token', result.data.token, {expires: 1})
+    Cookies.set('Token', result.data.token, { expires: 1 })
     commit('SET_USER', result.data)
   },
   async login({ commit }, data) {
     const result = await this.$axios.post('/auth/login', data)
-    Cookies.set('Token', result.data.token, {expires: 1})
+    Cookies.set('Token', result.data.token, { expires: 1 })
     commit('SET_USER', result.data)
   },
   async logout({ commit }) {
     Cookies.remove('Token')
     localStorage.removeItem('cart')
     commit('LOGOUT')
-  }
+  },
 }

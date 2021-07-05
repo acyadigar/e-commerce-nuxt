@@ -6,6 +6,6 @@ export default {
     state.cart.push(data)
   },
   REMOVE_FROM_CART(state, data) {
-    state.cart = state.cart.filter(item => item._id != data._id)
-  }
+    state.cart = state.cart.filter((item) => item._id != data._id)
+  },
 }
