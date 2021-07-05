@@ -57,7 +57,7 @@ export default {
               v-for="product in cart"
               :key="product._id"
               :product="product"
-              :isSmall="true"
+              columnSize=6
             />
           </b-row>
         </b-col>

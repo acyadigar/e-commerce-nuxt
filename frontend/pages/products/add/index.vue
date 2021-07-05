@@ -91,6 +91,7 @@ export default {
         class="col-8 m-auto p-0"
         :product="product"
         :key="product._id"
+        columnSize=8
       />
     </div>
   </div>

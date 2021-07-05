@@ -4,14 +4,11 @@ import cartHandler from '@/mixins/cartHandler'
 
 export default {
   mixins: [cartHandler],
-  props: ['product', 'isSmall'],
+  props: ['product', 'columnSize'],
   computed: {
     ...mapState({
       user: (state) => state.user,
     }),
-    isSmallCol() {
-      return this.isSmall ? 6 : 4
-    },
   },
   methods: {
     signIn() {
@@ -21,7 +18,7 @@ export default {
 }
 </script>
 <template>
-  <b-col cols="12" :md="isSmallCol" class="product-card mb-3">
+  <b-col cols="12" :md="columnSize" class="product-card mb-3">
     <b-row class="border m-0 rounded">
       <b-col cols="5" class="p-0">
         <b-card-img
