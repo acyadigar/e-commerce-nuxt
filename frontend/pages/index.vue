@@ -18,7 +18,7 @@ export default {
 <template>
   <div class="main">
     <header>
-      <h1>Alper's Bazaar</h1>
+      <h1>E-Bazaar</h1>
       <p>In order to find your most needed product;</p>
       <form @submit='submit' class="search-block">
         <input
@@ -63,21 +63,24 @@ h1 {
   margin: auto;
 }
 .search {
-  font-size: 2.5rem;
-  background-color: white;
+  width: 10%;
   height: 2.5rem;
-  align-self: center;
-  padding-right: 1rem;
+  padding: .3rem;
+  background-color: white;
   border-radius: 0 1rem 1rem 0;
 }
 input {
-  margin: auto;
-  width: 100%;
+  width: 90%;
   border-radius: 1rem 0 0 1rem;
   padding: 0.5rem 1rem;
   border: none;
 }
 input:focus {
   outline: 0;
+}
+@media screen and (max-width: 600px) {
+  .search-block {
+    width: 22rem;
+  }
 }
 </style>

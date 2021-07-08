@@ -16,7 +16,7 @@ export default {
 
 <template>
   <b-navbar toggleable="lg" type="dark" variant="dark">
-    <b-navbar-brand class="mr-5">Alper's Bazaar</b-navbar-brand>
+    <b-navbar-brand class="mr-5">E-Bazaar</b-navbar-brand>
 
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
