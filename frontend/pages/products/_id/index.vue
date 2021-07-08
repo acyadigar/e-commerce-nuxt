@@ -2,6 +2,16 @@
 import cartHandler from '@/mixins/cartHandler'
 
 export default {
+  head(){
+    return {
+      title: `E-Bazaar | ${this.product.title}`,
+      meta: [{
+        hid: 'product',
+        name: 'product',
+        content: this.product.info
+      }]
+    }
+  },
   mixins: [cartHandler],
   async asyncData({ $axios, params, error }) {
     try {
@@ -19,10 +29,10 @@ export default {
       return this.product.price * 1.2
     },
     randomStar() {
-      return Math.round(Math.random() * 5 + 1)
+      return Math.round(Math.random() * 5) + 1
     },
     remainStars() {
-      return 5 - this.randomStar
+      if(this.randomStar != 5) return 5 - this.randomStar
     },
   },
 }
