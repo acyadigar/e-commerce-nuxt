@@ -64,7 +64,7 @@ export default {
         ></b-form-input>
 
         <label class="sr-only" for="price">Price</label>
-        <b-input-group prepend="$">
+        <b-input-group prepend="₺">
           <b-form-input
             id="price"
             placeholder="Price"
