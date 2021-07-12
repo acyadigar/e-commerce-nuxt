@@ -48,7 +48,7 @@ export default {
 
   // Server Port
   server: {
-    port: 8000,
+    port: process.env.PORT || 8000,
   },
 
   // Loading bar
