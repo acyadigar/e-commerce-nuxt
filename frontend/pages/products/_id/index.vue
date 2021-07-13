@@ -1,4 +1,5 @@
 <script>
+import { mapState } from 'vuex'
 import cartHandler from '@/mixins/cartHandler'
 
 export default {
@@ -22,6 +23,12 @@ export default {
     }
   },
   computed: {
+    ...mapState({
+      user: (state) => state.user,
+    }),
+    isLoggedin() {
+      return this.user.username ? true : false
+    },
     sellers() {
       return this.product.sellers.map((seller) => seller.username)
     },
@@ -56,11 +63,11 @@ export default {
             <p class="price m-0">{{ product.price }}₺</p>
           </b-row>
           <b-row class="pl-3 mt-2">
-            <b-btn @click="add" variant="outline-primary" v-if="!onCart">
+            <b-btn @click="add" variant="outline-primary" v-if="!onCart" :disabled='isLoggedin'>
               <b-icon icon="cart-fill"> </b-icon>
               Add To Cart
             </b-btn>
-            <b-btn @click="remove" variant="outline-danger" v-else>
+            <b-btn @click="remove" variant="outline-danger" v-else :disabled='isLoggedin'>
               <b-icon icon="cart"> </b-icon>
               Remove From Cart
             </b-btn>
