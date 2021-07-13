@@ -36,12 +36,12 @@ export default {
             <span>Get an</span>
             <em><b>Account</b></em>
           </template>
-          <b-dropdown-item
-            ><AuthModal message="Login" :isLogin="true"
-          /></b-dropdown-item>
-          <b-dropdown-item
-            ><AuthModal message="Register" :isLogin="false"
-          /></b-dropdown-item>
+          <b-dropdown-item>
+            <ModalLogin />
+          </b-dropdown-item>
+          <b-dropdown-item>
+            <ModalRegister />
+          </b-dropdown-item>
         </b-nav-item-dropdown>
 
         <!-- If logged in -->
