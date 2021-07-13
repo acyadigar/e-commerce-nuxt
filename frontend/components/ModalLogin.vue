@@ -27,7 +27,7 @@ export default {
       try {
         this.isSaving = true
         await this.login(this.user)
-        this.$bvModal.hide(this.modal)
+        this.$bvModal.hide('auth-modal-login')
       } catch (e) {
         this.errors.push(e.response.data)
       }
@@ -43,7 +43,6 @@ export default {
     <b-link>Login</b-link>
     <b-modal
       id="auth-modal-login"
-      ref="auth-modal-login"
       hide-footer
       title="Login Here!"
       :size="modalSize"

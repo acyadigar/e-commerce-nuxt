@@ -30,7 +30,7 @@ export default {
       try {
         this.isSaving = true
         await this.register(this.user)
-        this.$bvModal.hide(this.modal)
+        this.$bvModal.hide('auth-modal-register')
       } catch (e) {
         this.errors.push(e.response.data)
       }
@@ -46,7 +46,6 @@ export default {
     <b-link>Register</b-link>
     <b-modal
       id="auth-modal-register"
-      ref="auth-modal-register"
       title="Register Here!"
       hide-footer
       :size="modalSize"
