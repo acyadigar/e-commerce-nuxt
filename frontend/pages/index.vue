@@ -53,7 +53,7 @@ header {
 h1 {
   padding-block: 1rem 2.5rem;
   text-align: center;
-  font-family: 'Walter Turncoat', cursive;
+  font-family: 'Courier New', Courier, monospace;
   font-size: 5rem;
   color: rgba(245, 245, 245, 0.5);
 }
@@ -79,8 +79,16 @@ input:focus {
   outline: 0;
 }
 @media screen and (max-width: 600px) {
+  h1 {
+    font-size: 3rem;
+    padding-block: 1rem;
+  }
+  header {
+    background-position-y: 17rem;
+    background-size: 24rem;
+  }
   .search-block {
-    width: 22rem;
+    width: 18rem;
   }
 }
 </style>

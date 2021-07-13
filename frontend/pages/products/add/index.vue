@@ -37,7 +37,7 @@ export default {
 </script>
 
 <template>
-  <div class="container col-6">
+  <b-container>
     <h1 class="text-center m-3">Add a product to sell!</h1>
     <b-form>
       <b-form-group
@@ -94,5 +94,5 @@ export default {
         columnSize=8
       />
     </div>
-  </div>
+  </b-container>
 </template>

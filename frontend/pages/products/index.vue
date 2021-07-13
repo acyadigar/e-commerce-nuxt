@@ -36,7 +36,13 @@ export default {
 
 <template>
   <b-container>
-    <h1 class="text-center mb-5">Here are the products which are added recently!</h1>
+    <b-row class="info mt-3">
+      <h1 class="text-center mb-5"
+        v-if="products.length">
+        Here are the products which are added recently!
+      </h1>
+      <h1 v-else>Could not find the products you searched for!</h1>
+    </b-row>
     <b-row>
       <ProductCard
         id="product-card"
@@ -57,3 +63,11 @@ export default {
     </div>
   </b-container>
 </template>
+
+<style scoped>
+@media screen and (max-width: 600px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+}
+</style>

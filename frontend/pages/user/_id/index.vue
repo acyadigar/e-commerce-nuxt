@@ -43,7 +43,7 @@ export default {
 <template>
   <b-container>
     <b-row class="pt-4">
-      <b-col cols="5">
+      <b-col cols="12" md='5'>
         <h4>Profile informations:</h4>
         <!-- User information -->
         <b-list-group class="mb-3">
@@ -103,7 +103,7 @@ export default {
         </b-card>
         <!-- User info editing card -->
       </b-col>
-      <b-col cols="7">
+      <b-col cols="12" md='7' class="showcase">
         <h4>Products on the showcase:</h4>
         <b-list-group>
           <b-list-group-item
@@ -119,3 +119,11 @@ export default {
     </b-row>
   </b-container>
 </template>
+
+<style scoped>
+@media screen and (max-width: 600px) {
+  .showcase {
+    margin-top: 2rem !important;
+  }
+}
+</style>

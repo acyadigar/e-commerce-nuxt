@@ -27,7 +27,7 @@ export default {
           :alt="product.title"
         ></b-card-img>
       </b-col>
-      <b-col cols="7" class="pl-4">
+      <b-col cols="7" class="pl-4 product-info">
         <h1 class="card-title">{{ product.title }}</h1>
         <p class="price text-info">{{ product.price }}₺</p>
         <div class="cart-handlers" v-if="Object.keys(user).length">
@@ -71,7 +71,7 @@ export default {
   overflow-wrap: break-word;
 }
 .price {
-  font-size: 1.8rem;
+  font-size: 1.5rem;
 }
 .add,
 .remove {
@@ -86,11 +86,20 @@ export default {
 .go-detail {
   position: absolute;
   bottom: 0;
-  right: 0.1rem;
+  right: 0rem;
   color: inherit;
 }
 .go-detail:hover {
   color: #5cb85c;
   cursor: pointer;
+}
+@media screen and (max-width: 400px) {
+  .product-info {
+    padding-left: 3rem !important;
+  }
+  .add,
+  .remove {
+    font-size: .9rem;
+  }
 }
 </style>
