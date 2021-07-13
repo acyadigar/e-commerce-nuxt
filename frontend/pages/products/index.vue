@@ -36,13 +36,13 @@ export default {
 
 <template>
   <b-container>
-    <b-row class="info mt-3">
-      <h1 class="text-center mb-5"
+    <div class="info mt-3 text-center">
+      <h1 class="mb-5"
         v-if="products.length">
         Here are the products which are added recently!
       </h1>
       <h1 v-else>Could not find the products you searched for!</h1>
-    </b-row>
+    </div>
     <b-row>
       <ProductCard
         id="product-card"
@@ -52,7 +52,7 @@ export default {
         columnSize=4
       />
     </b-row>
-    <div class="overflow-auto mt-4">
+    <div v-if='products.length' class="overflow-auto mt-4">
       <b-pagination-nav
         :link-gen="link"
         :number-of-pages="pages"
