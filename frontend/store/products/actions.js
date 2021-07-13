@@ -4,4 +4,7 @@ export default {
     const result = await this.$axios.post('/product', { user, product })
     return result.data
   },
+  async deleteProduct(_, productId) {
+    await this.$axios.delete(`/product/${productId}`)
+  }
 }

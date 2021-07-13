@@ -25,7 +25,10 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['editUser']),
+    ...mapActions({
+      editUser: 'editUser',
+      deleteProduct: 'products/deleteProduct'
+    }),
     edit() {
       const user = {
         token: this.token,
@@ -36,6 +39,10 @@ export default {
     toggleEdit() {
       this.isEditing = !this.isEditing
     },
+    async del(id) {
+      confirm('You sure?') ? await this.deleteProduct(id) : null
+      this.$nuxt.refresh()
+    }
   },
 }
 </script>
@@ -79,7 +86,7 @@ export default {
               id="edited-username"
               v-model="editedUser.username"
               type="email"
-              placeholder="Enter email"
+              placeholder="Enter username"
               required
             ></b-form-input>
           </b-form-group>
@@ -107,12 +114,18 @@ export default {
         <h4>Products on the showcase:</h4>
         <b-list-group>
           <b-list-group-item
+            class="product-name"
             v-for="product in userData.products"
             :key="product._id"
           >
             <nuxt-link :to="`/products/${product._id}`">
               {{ product.title }}
             </nuxt-link>
+            <b-icon v-if="isOwner"
+              icon='x-circle-fill' variant='danger'
+              @click="del(product._id)"
+              class="delete-icon"
+            ></b-icon>
           </b-list-group-item>
         </b-list-group>
       </b-col>
@@ -121,6 +134,14 @@ export default {
 </template>
 
 <style scoped>
+.product-name {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.delete-icon {
+  cursor: pointer;
+}
 @media screen and (max-width: 600px) {
   .showcase {
     margin-top: 2rem !important;
