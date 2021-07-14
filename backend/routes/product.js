@@ -35,6 +35,15 @@ router.get('/:id', async (req, res) => {
   res.send(product)
 })
 
+router.post('/:id/comment', async (req, res) => {
+  const product = await ProductService.find(req.params.id)
+  if(!product) return res.status(false).send('Failed!')
+
+  await ProductService.addComment(product, req.body.comment)
+
+  res.send(product)
+})
+
 router.post('/', async (req, res) => {
   const user = await UserService.findByUsername(req.body.user.username)
   const product = await ProductService.add(req.body.product)

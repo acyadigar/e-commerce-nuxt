@@ -3,14 +3,16 @@ import { mapState } from 'vuex'
 import cartHandler from '@/mixins/cartHandler'
 
 export default {
-  head(){
+  head() {
     return {
       title: `E-Bazaar | ${this.product.title}`,
-      meta: [{
-        hid: 'product',
-        name: 'product',
-        content: this.product.info
-      }]
+      meta: [
+        {
+          hid: 'product',
+          name: 'product',
+          content: this.product.info,
+        },
+      ],
     }
   },
   mixins: [cartHandler],
@@ -39,9 +41,14 @@ export default {
       return Math.round(Math.random() * 5) + 1
     },
     remainStars() {
-      if(this.randomStar != 5) return 5 - this.randomStar
+      if (this.randomStar != 5) return 5 - this.randomStar
     },
   },
+  methods: {
+    refreshData() {
+      this.$nuxt.refresh()
+    }
+  }
 }
 </script>
 
@@ -49,8 +56,10 @@ export default {
   <b-container>
     <b-row class="mt-3">
       <b-col cols="12" md="6">
-        <b-card-img :src="product.image" :alt="product.title"></b-card-img>
+        <b-card-img class='image' :src="product.image" :alt="product.title"></b-card-img>
       </b-col>
+
+      <!-- Product info starts -->
       <b-col cols="12" md="6">
         <div class="product-info border rounded p-3">
           <h1>{{ product.title }}</h1>
@@ -63,11 +72,21 @@ export default {
             <p class="price m-0">{{ product.price }}₺</p>
           </b-row>
           <b-row class="pl-3 mt-2">
-            <b-btn @click="add" variant="outline-primary" v-if="!onCart" :disabled='isLoggedin'>
+            <b-btn
+              @click="add"
+              variant="outline-primary"
+              v-if="!onCart"
+              :disabled="!isLoggedin"
+            >
               <b-icon icon="cart-fill"> </b-icon>
               Add To Cart
             </b-btn>
-            <b-btn @click="remove" variant="outline-danger" v-else :disabled='isLoggedin'>
+            <b-btn
+              @click="remove"
+              variant="outline-danger"
+              v-else
+              :disabled="!isLoggedin"
+            >
               <b-icon icon="cart"> </b-icon>
               Remove From Cart
             </b-btn>
@@ -120,11 +139,24 @@ export default {
           </b-row>
         </div>
       </b-col>
+      <!-- Product section ends -->
+    </b-row>
+    <b-row>
+      <Comments 
+        :product='product' 
+        :isLoggedin='isLoggedin'
+        :user='user'
+        @update-comment='refreshData'
+      />
     </b-row>
   </b-container>
 </template>
 
 <style scoped>
+.image,
+.product-info {
+  min-height: 22rem !important;
+}
 .product-info {
   background-color: #ebeff5;
   overflow-wrap: break-word;
@@ -157,10 +189,7 @@ export default {
 }
 @media screen and (max-width: 768px) {
   .product-info {
-    margin-top: 2rem;
+    margin-block: 2rem;
   }
-}
-.comments {
-  background-color: red;
 }
 </style>
