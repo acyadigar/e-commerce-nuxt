@@ -79,6 +79,10 @@ input:focus {
   outline: 0;
 }
 @media screen and (max-width: 600px) {
+  header p {
+    width: 75%;
+    margin-inline: auto;
+  }
   h1 {
     font-size: 3rem;
     padding-block: 1rem;
