@@ -132,7 +132,7 @@ export default {
           </b-row>
           <b-row class="info mt-3">
             <b-col cols="12">
-              <p>
+              <p class="product-info-text">
                 {{ product.info }}
               </p>
             </b-col>
@@ -186,6 +186,9 @@ export default {
 .sellers {
   background-color: rgb(255, 247, 247);
   border-radius: 5px;
+}
+.product-info-text {
+  white-space: pre-line;
 }
 @media screen and (max-width: 768px) {
   .product-info {
