@@ -9,6 +9,7 @@ export default {
     }),
     async sendComment() {
       if (!this.comment) return
+      if(!this.isLoggedin) return this.showAlert = true
       this.isSaving = true
       const userComment = {
         productId: this.product._id,
@@ -27,6 +28,7 @@ export default {
     return {
       comment: '',
       isSaving: false,
+      showAlert: false
     }
   }
 }
@@ -35,8 +37,8 @@ export default {
 <template>
   <b-col cols="12" class="mt-4">
       <!-- Comment section starts -->
-    <h4 class="text-center mb-3">Comments</h4>
-    <b-col cols="12" class="comments mb-5" v-if="product.comments.length">
+    <b-col cols="12" class="comments" v-if="product.comments.length">
+    <h4 class="text-center">Comments</h4>
       <ul
         v-for="comment in product.comments"
         :key="comment.id"
@@ -48,8 +50,16 @@ export default {
         <li class="speech-bubble">{{ comment.message }}</li>
       </ul>
     </b-col>
-    <b-col cols="12" class="make-comment mt-5" v-if="isLoggedin">
+    <b-col cols="12" class="make-comment mt-5">
       <p class="m-0">Leave a comment...</p>
+
+      <b-alert v-model="showAlert" variant="danger" dismissible fade
+        class="position-fixed fixed-bottom m-0 rounded-0"
+        style="z-index: 2000;"
+      >
+        You need to login first!
+      </b-alert>
+
       <b-form-textarea v-model="comment"></b-form-textarea>
       <b-button
         class="mt-2 mb-2 float-right"
