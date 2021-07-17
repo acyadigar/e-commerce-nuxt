@@ -71,7 +71,7 @@ export default {
       />
     </b-row>
 
-    <div v-if='products.length' class="overflow-auto mt-4">
+    <div v-if='productsLength > 6' class="overflow-auto mt-4">
       <b-pagination-nav
         :link-gen="link"
         :number-of-pages="pages"
