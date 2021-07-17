@@ -1,8 +1,9 @@
 <script>
 export default {
-  watchQuery: ['page', 'search'],
+  watchQuery: ['page', 'search', 'category'],
   async asyncData({ $axios, route }) {
     let products;
+    const category = route.query.category
     const search = route.query.search
     const [perPage, currentPage] = [route.query.perPage || 6, route.query.page || 1]
 
@@ -10,14 +11,20 @@ export default {
       products = await $axios.get(
         `/product/all/paginated?search=${search}&page=${currentPage}&perPage=${perPage}`
       )
-    } else {
+    }
+    else if (route.query.category) {
+      products = await $axios.get(
+        `/product/all/paginated?category=${category}&page=${currentPage}&perPage=${perPage}`
+      )
+    } 
+    else {
       products = await $axios.get(
         `/product/all/paginated?page=${currentPage}&perPage=${perPage}`
       )
     }
     const productsLength = products.data.productsLength
     products = products.data.products
-    return { products, productsLength, currentPage, perPage }
+    return { products, productsLength, currentPage, perPage, category }
   },
   computed: {
     pages() {
@@ -35,14 +42,25 @@ export default {
 </script>
 
 <template>
-  <b-container>
-    <div class="info mt-3 text-center">
-      <h1 class="mb-5"
-        v-if="products.length">
-        Here are the products which are added recently!
-      </h1>
-      <h1 v-else>Could not find the products you searched for!</h1>
-    </div>
+  <div id="products">
+    <div class="info text-center">
+      <b-jumbotron header="E-Bazaar">
+        <hr>
+        <CategoryMenu />
+      </b-jumbotron>
+      
+      <h2 v-if="products.length && !category"> 
+        Here are the products which are added recently! 
+      </h2>
+      <h2 v-else-if="products.length && category"> 
+        There are {{ productsLength }} products in {{ category.toLowerCase()}} category! 
+      </h2>
+      <h2 v-else>
+        No products exist!
+      </h2>
+
+  </div>
+  <b-container class="mt-5">
     <b-row>
       <ProductCard
         id="product-card"
@@ -52,6 +70,7 @@ export default {
         columnSize=4
       />
     </b-row>
+
     <div v-if='products.length' class="overflow-auto mt-4">
       <b-pagination-nav
         :link-gen="link"
@@ -62,11 +81,23 @@ export default {
       ></b-pagination-nav>
     </div>
   </b-container>
+  </div>
 </template>
 
 <style scoped>
+.jumbotron {
+  border-radius: 0;
+  background-color: rgba(220, 50, 50, 0.9);
+  color: white;
+}
+.display-3 {
+  color: rgba(245, 245, 245, 0.5);
+  font-family: 'Courier New', Courier, monospace;
+}
 @media screen and (max-width: 600px) {
-  h1 {
+  h2 {
+    width: 80%;
+    margin: auto;
     font-size: 1.5rem;
   }
 }
