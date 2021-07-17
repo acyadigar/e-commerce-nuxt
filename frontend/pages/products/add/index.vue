@@ -73,6 +73,20 @@ export default {
         </b-input-group>
       </div>
 
+      <b-form-group
+        description="Select the category."
+      >
+        <b-form-select v-model='product.category' class="mt-4">
+          <option> Electronics </option>
+          <option> Fashion </option>
+          <option> Accessories </option>
+          <option> Sports </option>
+          <option> Medical </option>
+          <option> Pets & Pets Supplies </option>
+          <option> Other </option>
+        </b-form-select>
+      </b-form-group>
+
       <b-form-textarea
         id="info"
         v-model="product.info"
