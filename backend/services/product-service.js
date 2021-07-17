@@ -8,6 +8,10 @@ class ProductService extends BaseService {
     return this.model.find({'title': {'$regex': query, '$options': 'i'}})
   }
 
+  async findCategory(query) {
+    return this.model.find({'category': query})
+  }
+
   async addComment(product, comment) {
     product.comments.push(comment)
     await product.save()
