@@ -82,7 +82,7 @@ export default {
           <option> Accessories </option>
           <option> Sports </option>
           <option> Medical </option>
-          <option> Pets & Pets Supplies </option>
+          <option> Pets </option>
           <option> Other </option>
         </b-form-select>
       </b-form-group>
