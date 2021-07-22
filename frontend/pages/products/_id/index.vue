@@ -28,6 +28,14 @@ export default {
     ...mapState({
       user: (state) => state.user,
     }),
+    timeDifference() {
+      const now = new Date().getTime()
+      const productTime = new Date(this.product.date).getTime()
+      const seconds = ((now - productTime) / 1000)
+      const minutes = Math.floor(seconds / 60)
+      const hours = Math.floor(minutes / 60)
+      return minutes > 60 ? { hours } : { minutes }
+    },
     isLoggedin() {
       return this.user.username ? true : false
     },
@@ -137,6 +145,11 @@ export default {
               </p>
             </b-col>
           </b-row>
+          <p class="time-diff">
+            On sale for 
+            {{ timeDifference.hours || timeDifference.minutes }} 
+            {{ (Object.keys(timeDifference)).toString() }}
+          </p>
         </div>
       </b-col>
       <!-- Product section ends -->
@@ -158,6 +171,7 @@ export default {
   min-height: 22rem !important;
 }
 .product-info {
+  position: relative;
   background-color: #ebeff5;
   overflow-wrap: break-word;
 }
@@ -189,6 +203,13 @@ export default {
 }
 .product-info-text {
   white-space: pre-line;
+}
+.time-diff {
+  position: absolute;
+  right: 7px;
+  bottom: -1rem;
+  font-size: .8rem;
+  color: grey;
 }
 @media screen and (max-width: 768px) {
   .product-info {
