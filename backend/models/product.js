@@ -13,7 +13,11 @@ const ProductSchema = new mongoose.Schema({
       autopopulate: {
         maxDepth: 1
       }
-    }]
+    }],
+    date: {
+      type: Date,
+      default: Date.now
+    }  
 })
 
 ProductSchema.plugin(require('mongoose-autopopulate'))
