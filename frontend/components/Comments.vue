@@ -6,6 +6,7 @@ export default {
   methods: {
     ...mapActions({
       makeComment: 'products/makeComment',
+      deleteComment: 'products/deleteComment'
     }),
     async sendComment() {
       if (!this.comment) return
@@ -22,6 +23,14 @@ export default {
       this.$emit('update-comment')
       this.comment = ''
       this.isSaving = false
+    },
+    async delComment(commentId) {
+      const comment = {
+        productId: this.product._id,
+        commentId: commentId
+      }
+      await this.deleteComment(comment)
+      this.$emit('update-comment')
     }
   },
   data() {
@@ -44,6 +53,7 @@ export default {
         :key="comment.id"
         class="comment-list border p-2"
       >
+        <b-icon v-if="user.username == comment.user" icon='x' class="del-comment" @click="delComment(comment.id)"></b-icon>
         <li class="comment-user-name font-weight-bold">
           <nuxt-link :to='`/user/${comment.user}`'>{{ comment.user }}</nuxt-link>
         </li>
@@ -103,5 +113,11 @@ export default {
 	border-right-color: #E1E8EB;
 	border-left: 0;
 	border-top: 0;
+}
+.del-comment {
+  cursor: pointer;
+  color:red;
+  position:absolute;
+  right:1rem;
 }
 </style>

@@ -48,6 +48,14 @@ router.post('/:id/comment', async (req, res) => {
   res.send(product)
 })
 
+router.delete('/:id/comment/:commentId', async (req, res) => {
+  const product = await ProductService.find(req.params.id)
+  if(!product) return res.status(false).send('Failed!')
+
+  await ProductService.deleteComment(product, req.params.commentId)
+  res.send(product)
+})
+
 router.post('/', async (req, res) => {
   const user = await UserService.findByUsername(req.body.user.username)
   const product = await ProductService.add(req.body.product)

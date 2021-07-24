@@ -9,6 +9,11 @@ export default {
     const result = await this.$axios.post(`/product/${productId}/comment`, {comment})
     return result.data
   },
+  async deleteComment(_, comment) {
+    const { productId, commentId } = comment
+    const result = await this.$axios.delete(`/product/${productId}/comment/${commentId}`)
+    return result.data
+  },
   async deleteProduct(_, productId) {
     await this.$axios.delete(`/product/${productId}`)
   }

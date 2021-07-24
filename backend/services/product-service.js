@@ -13,7 +13,16 @@ class ProductService extends BaseService {
   }
 
   async addComment(product, comment) {
+    comment.id = product.comments.length + 1
+    
     product.comments.push(comment)
+    await product.save()
+  }
+
+  async deleteComment(product, commentId) {
+    const comment = product.comments.find(comment => comment.id == commentId)
+    product.comments.splice(product.comments.indexOf(comment), 1)
+
     await product.save()
   }
 }
