@@ -1,33 +1,15 @@
-const express = require('express')
-const router = express.Router()
+const router = require('express').Router()
 
-const UserService = require('../services/user-service')
+const allUsers = require('../controllers/user/all-users')
+const allUsersJson = require('../controllers/user/all-users-json')
+const findUser = require('../controllers/user/find-user')
+const addUser = require('../controllers/user/add-user')
+const deleteUser = require('../controllers/user/delete-user')
 
-router.get('/all', async (req, res) => {
-    const users = await UserService.findAll()
-    res.render("data", {data: users})
-})
-
-router.get('/all/json', async (req, res) => {
-    const users = await UserService.findAll()
-    res.status(202).send(users)
-})
-
-router.get('/:id', async (req, res) => {
-    // const user = await UserService.find(req.params.id)
-    const user = await UserService.findByUsername(req.params.id)
-    if(!user) return res.status(404).send('No user exists!')
-    res.send(user)
-})
-
-router.post('/', async (req, res) => {
-    const user = await UserService.add(req.body)
-    res.send(user)
-})
-
-router.delete('/:id', async (req, res) => {
-    const user = await UserService.del(req.params.id)
-    res.send(user)
-})
+router.get('/all', allUsers)
+router.get('/all/json', allUsersJson)
+router.get('/:id', findUser)
+router.post('/', addUser)
+router.delete('/:id', deleteUser)
 
 module.exports = router

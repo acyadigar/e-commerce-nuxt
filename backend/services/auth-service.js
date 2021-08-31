@@ -1,7 +1,6 @@
 require('dotenv').config()
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
-const UserService = require('../services/user-service')
 
 class AuthService{
   signToken(user) {
@@ -20,27 +19,13 @@ class AuthService{
     }
   }
 
-  async register(user) {
-    const isAlreadyRegistered = await UserService.findByUsername(user.username)
-    if (isAlreadyRegistered) return
-    
+  async hashUser(user) {    
     const hashedPassword = await bcrypt.hash(user.password, 8)
     user.password = hashedPassword
-    const registeredUser = await UserService.add(user)
-    const token = this.signToken(registeredUser)
-
-    const newUser = {
-      email: registeredUser.email,
-      username: registeredUser.username,
-      token
-    }
-    return newUser
+    return user
   }
 
-  async login(userInput) {
-    let user = await UserService.findByUsername(userInput.username)
-    if(!user) return
-
+  async login(userInput, user) {
     const validUser = await bcrypt.compare(userInput.password, user.password)
     if (!validUser) return
 
@@ -51,15 +36,6 @@ class AuthService{
       token
     }
     return user
-  }
-
-  async updateUser(token, updatedUser) {
-  const user = await UserService.findByUsername(token.username)
-  let newUser = await UserService.update(user._id, updatedUser)
-  const newToken = this.signToken(newUser)
-  
-  newUser = {username: newUser.username, email: newUser.email, token: newToken} 
-  return newUser
   }
 }
 
