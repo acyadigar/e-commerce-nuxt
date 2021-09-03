@@ -6,7 +6,7 @@ const findProduct = require('../controllers/product/find-product')
 const addProduct = require('../controllers/product/add-product')
 const deleteProduct = require('../controllers/product/delete-product')
 const updateProduct = require('../controllers/product/update-product')
-const comment = require('../controllers/product//comment')
+const comment = require('../controllers/product/comment')
 const deleteComment = require('../controllers/product/delete-comment')
 
 router.get('/all', allProducts)
